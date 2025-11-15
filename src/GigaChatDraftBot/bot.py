@@ -16,6 +16,8 @@ dp = Dispatcher()
 async def start_message(message: types.Message):
     await message.answer(f"Привет, {message.from_user.first_name}!\nРасскажи, как ты себя чувствуешь?")
 
+# Добавить обработку сообщений типа: "Скоро отвечу вам..."
+
 @dp.message(F.text)
 async def text_message(message: types.Message):
     gigachat_response = response_gigachat(message.text)   # Запрос к гигачату
