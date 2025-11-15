@@ -1,9 +1,7 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
-import torch
-
-import LLM
 #Импортируем функции для работы
 from LLM import translate_en_to_ru, translate_ru_to_en,
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
+import torch
 
 # Проверка доступности MPS (Metal для Mac)
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
@@ -57,6 +55,7 @@ SYSTEM_PROMPT = """You are Lora, a mental health AI assistant. Rules:
 4. Keep responses brief
 5. End with: "Remember, I'm an AI assistant, not a therapist"."""
 
+
 def generate_response(text: str) -> str:
     if model is None:
         return "Извините, модель временно недоступна. Пожалуйста, попробуйте позже."
@@ -71,7 +70,7 @@ def generate_response(text: str) -> str:
             outputs = model.generate(
                 **inputs,
                 max_new_tokens=200,
-                temperature=0.7, # Это можем менять в пределах 0.5-0.8
+                temperature=0.7,
                 top_p=0.9,
                 repetition_penalty=1.1,
                 do_sample=True,
@@ -94,17 +93,26 @@ def generate_response(text: str) -> str:
         print(f"Ошибка генерации: {e}")
         return "Произошла ошибка при обработке запроса. Пожалуйста, попробуйте еще раз."
 
-def main(text):
 
-    en_text = LLM.translate_ru_to_en(text)
-    response = generate_response(en_text)
-    response_ru = LLM.translate_en_to_ru(response)
-    print('Вот ответ нашей модели: \n')
+def main(text):
+    print(f"Входной текст: {text}")
+
+    # Переводим на английский
+    en_text = translate_ru_to_en(text)
+    print(f"Перевод на английский: {en_text}")
+
+    # Генерируем ответ
+    response_en = generate_response(en_text)
+    print(f"Ответ на английском: {response_en}")
+
+    # Переводим обратно на русский
+    response_ru = translate_en_to_ru(response_en)
+    print('\nВот ответ нашей модели: \n')
     print(response_ru)
 
-if __name__ == 'main':
-    # Сюда введи текст для проверки, вот варианты:
-    'Я с трудом сплю и ничего не делаю, но думаю о том, как я бесполезна и как не должна быть здесь я никогда не пробовала или не планировала самоубийство я всегда хотела исправить свои проблемы но я никогда не могу понять как я могу изменить свое чувство никчемности для всех'
 
-    main('Я с трудом сплю и ничего не делаю, но думаю о том, как я бесполезна и как не должна быть здесь я никогда не пробовала или не планировала самоубийство я всегда хотела исправить свои проблемы но я никогда не могу понять как я могу изменить свое чувство никчемности для всех'
-)
+if __name__ == '__main__':
+    # Тестовый текст - введи тут свой, если надо
+    test_text = 'Я с трудом сплю и ничего не делаю, но думаю о том, как я бесполезна и как не должна быть здесь я никогда не пробовала или не планировала самоубийство я всегда хотела исправить свои проблемы но я никогда не могу понять как я могу изменить свое чувство никчемности для всех'
+
+    main(test_text)
