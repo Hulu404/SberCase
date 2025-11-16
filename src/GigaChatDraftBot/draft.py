@@ -18,8 +18,8 @@ async def start_message(message: types.Message):
 
 @dp.message(F.voice)
 async def send_voi(message: types.Message):
-    await bot.send_chat_action(message.chat.id, "typing")
-
+    # Отправляем уведомление о начале обработки - в дальнейшем будем его изменять
+    notice_msg = await message.answer("🎧 Начинаю обрабатывать голосовое сообщение...")
     await bot.send_chat_action(message.chat.id, "typing")
 
     try:
@@ -31,16 +31,25 @@ async def send_voi(message: types.Message):
         text = await speech_processor.speech_to_text(voice_data.read())
 
         if text:
+            # Отправка распознанного текста
             await message.answer(f"🎤 Распознано: {text}")
 
-            # Отправляем в GigaChat
+            # Обновляем уведомление для этапа нейросети
+            await notice_msg.edit_text("⌛️ Начинаю обрабатывать ваш запрос...")
             await bot.send_chat_action(message.chat.id, "typing")
-            response = response_gigachat(message.text)
+
+            # Отправляем в GigaChat
+            response = response_gigachat(text)
+
+            # Удаляем уведомление и отправляем финальный ответ
+            await notice_msg.delete()
             await message.answer(response)
         else:
             await message.answer("Не удалось распознать голос")
-
+            await notice_msg.delete()
     except Exception as e:
+        await notice_msg.delete()
+        await message.answer("❌ Произошла ошибка при обработке аудио")
         print(f"[INFO]: {e}")
 
 async def main():
