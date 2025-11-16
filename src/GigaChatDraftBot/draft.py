@@ -13,7 +13,10 @@ dp = Dispatcher()
 
 @dp.message(Command('start'))
 async def start_message(message: types.Message):
-    await message.answer("Ghngjjsn")
+    await message.answer(
+        f"Привет, {message.from_user.first_name}!\nЯ **Ника**, твой ИИ-помощник для ментальной поддержки в спорте.\n"
+        f"Расскажи, с каким вызовом столкнулся на этой неделе?\n\n"
+        f"*Как ИИ, я не заменяю работу с психологом, но я всегда здесь, чтобы выслушать и предложить практическую стратегию.*")
 
 
 @dp.message(F.voice)
