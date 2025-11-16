@@ -4,11 +4,7 @@ import logging
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 
-import io
-from gtts import gTTS
-
-from test import response_gigachat
-from text_to_speech import voice_to_text
+#from text_to_speech import voice_to_text
 
 from config import *
 from test import *
