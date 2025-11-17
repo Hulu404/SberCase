@@ -35,14 +35,9 @@
 ```bash
 SberCase/
 src/
-└── GigaChatDraftBot/
-    ├── bot.py
-    ├── breath.py
-    ├── config.py
-    ├── keyboard.py
-    ├── test.py
-    └── text2Voice.py
-├── main.py
+  ├── bot.py # Основная логика работы бота
+  ├── config.py # Токены для использования
+  ├── test.py # Функции для тестового использования
 ├── requirements.txt  
 └── README.md
 ```
