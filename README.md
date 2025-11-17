@@ -116,7 +116,10 @@ mind-support-bot/
 
 ## 🔄 Логика работы
 
-![Архитектура проекта](https://via.placeholder.com/600x400/4285F4/FFFFFF?text=Диаграмма+работы+бота)
+<details>
+<summary><strong>Развернуть логику работы</strong></summary>
+<img src="/images/Scheme.jpg">
+</details>
 
 *Пользовательский поток: Старт → Выбор функции → Взаимодействие → Сохранение прогресса*
 
@@ -242,7 +245,7 @@ def response_gigachat(promt, token=token):
 
 <details>
 <summary><strong>Развернуть стратегию развития</strong></summary>
-<img src="/images/Roadmap.png" alt="Компьютер">
+<img src="/images/Roadmap.png">
 </details>
 
 ---
