@@ -123,6 +123,14 @@ pip install -r requirements.txt
 
 ---
 
+**Подготовка src/config:**
+```bash
+# src/config
+TOKEN = # Ваш ТГ-токен
+AUTH_KEY = # Ваш GigaChat-токен
+```
+
+---
 **Запуск бота**
 ```python
 # main.py
