@@ -1,0 +1,41 @@
+Index: src/GigaChatDraftBot/text2Voice.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import os\r\nfrom gtts import gTTS\r\n\r\ndef text2Voice(text, lang=\"ru\"):\r\n    tts = gTTS(text, lang=lang)\r\n    tts.save(\"test.mp3\")\r\n    return os.path.realpath(\"test.mp3\")\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/GigaChatDraftBot/text2Voice.py b/src/GigaChatDraftBot/text2Voice.py
+--- a/src/GigaChatDraftBot/text2Voice.py	(revision a558a939913a1246748580b1fad0675de352f471)
++++ b/src/GigaChatDraftBot/text2Voice.py	(date 1763380831017)
+@@ -1,11 +1,25 @@
+ import os
++import logging
++import asyncio
+ from gtts import gTTS
++from aiogram import Bot, Dispatcher, types, F
++from config import *
+ 
+-def text2Voice(text, lang="ru"):
+-    tts = gTTS(text, lang=lang)
++bot =Bot(token=TOKEN)
++dp = Dispatcher()
++
++@dp.message(F.text)
++async def text2Voice(message: types.Message, lang="ru"):
++    tts = gTTS(message.text, lang=lang)
+     tts.save("test.mp3")
+-    return os.path.realpath("test.mp3")
+-
++    return message.answer_audio(os.path.realpath("test.mp3"))
+ 
++async def main():
++    await dp.start_polling(bot)
+ 
+-
++if __name__ == "__main__":
++    logging.basicConfig(level=logging.INFO)
++    try:
++        asyncio.run(main())
++    except KeyboardInterrupt:
++        print("Exit")

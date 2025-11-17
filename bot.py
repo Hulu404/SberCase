@@ -7,7 +7,7 @@ from aiogram.filters import Command
 from test import response_gigachat
 
 from handlers.keyboards import options
-from config import *
+from GigaChatDraftBot.config import *
 from test import *
 
 bot = Bot(token=TOKEN)
