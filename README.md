@@ -33,27 +33,16 @@
 <summary><strong>Развернуть структуру проекта</strong></summary>
   
 ```bash
-mind-support-bot/
-├── src/ 
-│   ├── bot/
-│   │   ├── __init__.py  
-│   │   ├── core.py # Основная логика бота  
-│   │   ├── handlers/ # Обработчики сообщений  
-│   │   │   ├── common.py  
-│   │   │   ├── support.py  
-│   │   │   └── exercises.py  
-│   │   └── keyboards.py # Клавиатуры и кнопки  
-│   ├── database/  
-│   │   ├── models.py # Модели данных  
-│   │   └── crud.py # Операции с БД  
-│   ├── utils/ 
-│   │   ├── helpers.py # Вспомогательные функции  
-│   │   └── content_loader.py # Загрузчик контента  
-│   └── config.py # Конфигурация  
-├── data/  
-│   ├── exercises/ # Медитации и упражнения  
-│   └── phrases.json # Поддерживающие фразы  
-├── tests/  
+SberCase/
+src/
+└── GigaChatDraftBot/
+    ├── bot.py
+    ├── breath.py
+    ├── config.py
+    ├── keyboard.py
+    ├── test.py
+    └── text2Voice.py
+├── main.py
 ├── requirements.txt  
 └── README.md
 ```
