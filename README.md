@@ -37,7 +37,7 @@ SberCase/
 src/
   ├── bot.py # Основная логика работы бота
   ├── config.py # Токены для использования
-  ├── test_func.py # Функции для тестового использования
+  ├── giga_start.py # Функции для тестового использования
   ├── test.py # Тестовое использование
 ├── requirements.txt  
 └── README.md
@@ -146,6 +146,7 @@ if __name__ == "__main__":
 ---
 
 **Тестовый запуск ответа неросети**
+
 ```python
 # test.py
 
@@ -183,11 +184,11 @@ SYSTEM_PROMPT = '''
 
 from config import TOKEN, AUTH_KEY
 import logging
-from test_func import *
+from giga_start import *
 
 token = test_func.get_gigachat_token(AUTH_KEY)
 
-Prompt= ... # Сюда впишите ваш запрос
+Prompt = ...  # Сюда впишите ваш запрос
 
 answer = test_func.response_gigachat(Prompt, token=token)
 print(f'Ваш ответ:\n{answer}')
